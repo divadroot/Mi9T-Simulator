@@ -65,7 +65,7 @@ $(document).ready(function() {
         var width = document.documentElement.clientWidth - 70;
         var ratio = mi9t.width() / width;
     } else {
-        var height = document.documentElement.clientHeight - 140;
+        var height = document.documentElement.clientHeight - 70;
         var ratio = mi9t.height() / height;
     }
 
@@ -77,8 +77,6 @@ $(document).ready(function() {
     resizeElement(camera, ratio);
     resizeElement(viewport, ratio);
     resizeElement(cswitch, ratio);
-
-    updateCounter(false);
 
     // przeładuj dźwięki aby nie było "laga"
     for (var i in audioFiles) {
@@ -98,26 +96,20 @@ function switchCamera() {
     background = isOpen ? "landscape.png" : "portrait.png";
     filename = isOpen ? "elo.ogg" : "arix.ogg";
 
-    updateCounter(true);
+    counter++;
 
     cswitch.animateRotate(isOpen ? -180 : 180);
     playAudio(filename);
     
     camera.animate({ top: endPos }, 1200, "linear", function() {
         viewport.css("background-image", "url(" + background + ")");
+        localStorage.setItem("counter", counter);
         
         // odpal inbe
         if (counter === 2137) {
-            document.location.href = "https://www.youtube.com/watch?v=zglAhtxH9LY";
+            viewport.html('<iframe src="https://www.youtube-nocookie.com/embed/zglAhtxH9LY?autoplay=1&loop=1&fs=0&controls=0&disablekb=1" width="' + viewport.width() + '" height="' + viewport.height() + '" frameborder="0"></iframe>');
+        } else {
+            viewport.html("");
         }
     });
-};
-
-function updateCounter(increment) {
-    if (increment) {
-        counter++;
-    }
-
-    $("#counter").text("" + counter)
-    localStorage.setItem("counter", counter);
 };
