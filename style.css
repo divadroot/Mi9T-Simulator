@@ -1,0 +1,47 @@
+#body {
+    display: none;
+    text-align: center;
+}
+
+#mi9t {
+    display: inline-block;
+    position: relative;
+    width: 720px;
+    height: 1584px;
+    background-image: url("frame.png");
+    background-size: cover;
+}
+
+#camera {
+    position: absolute;
+    top: 76px;
+    left: 151px;
+    width: 134px;
+    height: 80px;
+    background-image: url("camera.png");
+    background-size: cover;
+    z-index: -1;
+}
+
+#switch {
+    position: absolute;
+    top: 1312px;
+    left: 508px;
+    width: 84px;
+    height: 84px;
+    background-image: url("switch.png");
+    background-size: cover;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#viewport {
+    position: absolute;
+    top: 287px;
+    left: 23px;
+    width: 670px;
+    height: 875px;
+    background-image: url("landscape.png");
+    background-size: cover;
+    z-index: -1;
+}
