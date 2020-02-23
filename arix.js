@@ -62,8 +62,6 @@ $(document).ready(function() {
     resizeElement(camera, ratio);
     resizeElement(viewport, ratio);
     resizeElement(cswitch, ratio);
-    
-    $(".github-corner").load("github.svg");
 
     // przeładuj dźwięki aby nie było "laga"
     for (var i in audioFiles) {
