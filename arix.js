@@ -26,7 +26,7 @@ $.fn.animateRotate = function(angle, duration, easing, complete) {
         $({deg: 0}).animate({deg: angle}, args);
     });
 };
-    
+
 function preloadAudio(url) {
     var audio = new Audio();
     audio.addEventListener("canplaythrough", loadedAudio, false);
@@ -65,7 +65,7 @@ $(document).ready(function() {
         var width = document.documentElement.clientWidth - 70;
         var ratio = mi9t.width() / width;
     } else {
-        var height = document.documentElement.clientHeight - 130;
+        var height = document.documentElement.clientHeight - 140;
         var ratio = mi9t.height() / height;
     }
 
