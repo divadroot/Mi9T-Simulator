@@ -85,13 +85,13 @@ $(document).ready(function() {
 
 function switchCamera() {
     var cameraPos = parseInt(getAbsolute(camera, "top"));
-    var isOpen = cameraPos === 0;
+    var isOpen = cameraPos === 1;
 
     if (cameraPos > 0 && cameraPos < parseInt(startPos)) {
         return;
     }
 
-    endPos = isOpen ? startPos : 0;
+    endPos = isOpen ? startPos : 1;
     background = isOpen ? "landscape.png" : "portrait.png";
     filename = isOpen ? "elo.ogg" : "arix.ogg";
 
