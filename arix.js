@@ -11,6 +11,20 @@ var audioFiles = [
 ];
 
 var startPos = 76;
+
+$.fn.animateRotate = function(angle, duration, easing, complete) {
+    var args = $.speed(duration, easing, complete);
+    var step = args.step;
+    return this.each(function(i, e) {
+        args.complete = $.proxy(args.complete, e);
+        args.step = function(now) {
+        $.style(e, 'transform', 'rotate(' + now + 'deg)');
+            if (step) return step.apply(e, arguments);
+        };
+
+        $({deg: 0}).animate({deg: angle}, args);
+    });
+};
     
 function preloadAudio(url) {
     var audio = new Audio();
@@ -54,7 +68,7 @@ $(document).ready(function() {
         var ratio = mi9t.height() / height;
     }
 
-    startPos = parseInt(getAbsolute(camera, "top") / ratio);
+    startPos = getAbsolute(camera, "top") / ratio;
     cswitch.on("click", switchCamera);
 
     // kurwa jebane absolut i brak responsive
@@ -73,34 +87,21 @@ function switchCamera() {
     var cameraPos = parseInt(getAbsolute(camera, "top"));
     var isOpen = cameraPos === 0;
 
-    if (cameraPos > 0 && cameraPos < startPos) {
+    if (cameraPos > 0 && cameraPos < parseInt(startPos)) {
         return;
     }
 
-    offset = isOpen ? 1 : -1;
     endPos = isOpen ? startPos : 0;
-    imgUrl = isOpen ? "landscape.png" : "portrait.png";
+    background = isOpen ? "landscape.png" : "portrait.png";
+    filename = isOpen ? "elo.ogg" : "arix.ogg";
 
-    if (!isOpen) {
-        playAudio("arix.ogg");
-    } else {
-        playAudio("elo.ogg");
-    }
-
-    setTimeout(function() {
-        playAnimation(offset, endPos, imgUrl);
-    }, 200);
+    cswitch.animateRotate(isOpen ? -180 : 180);
+    playAnimation(endPos, background, filename);
 };
 
-function playAnimation(offset, endPos, imgUrl) {
-    timer = setInterval(function() {
-        var currentPos = getAbsolute(camera, "top")
-        if (parseInt(currentPos) === endPos) {
-            viewport.css("background-image", "url(" + imgUrl + ")");
-            clearInterval(timer);
-            return;
-        }
-
-        camera.css("top", (currentPos + offset) + "px");
-    }, 30);
+function playAnimation(endPos, background, filename) {
+    playAudio(filename);
+    camera.animate({ top: endPos }, 1200, "linear", function() {
+        viewport.css("background-image", "url(" + background + ")");
+    });
 };
