@@ -11,6 +11,7 @@ var audioFiles = [
 ];
 
 var startPos = 76;
+var counter = localStorage.getItem("counter") || 0;
 
 $.fn.animateRotate = function(angle, duration, easing, complete) {
     var args = $.speed(duration, easing, complete);
@@ -64,7 +65,7 @@ $(document).ready(function() {
         var width = document.documentElement.clientWidth - 70;
         var ratio = mi9t.width() / width;
     } else {
-        var height = document.documentElement.clientHeight - 70;
+        var height = document.documentElement.clientHeight - 130;
         var ratio = mi9t.height() / height;
     }
 
@@ -76,6 +77,8 @@ $(document).ready(function() {
     resizeElement(camera, ratio);
     resizeElement(viewport, ratio);
     resizeElement(cswitch, ratio);
+
+    updateCounter(false);
 
     // przeładuj dźwięki aby nie było "laga"
     for (var i in audioFiles) {
@@ -95,13 +98,26 @@ function switchCamera() {
     background = isOpen ? "landscape.png" : "portrait.png";
     filename = isOpen ? "elo.ogg" : "arix.ogg";
 
-    cswitch.animateRotate(isOpen ? -180 : 180);
-    playAnimation(endPos, background, filename);
-};
+    updateCounter(true);
 
-function playAnimation(endPos, background, filename) {
+    cswitch.animateRotate(isOpen ? -180 : 180);
     playAudio(filename);
+    
     camera.animate({ top: endPos }, 1200, "linear", function() {
         viewport.css("background-image", "url(" + background + ")");
+        
+        // odpal inbe
+        if (counter === 2137) {
+            document.location.href = "https://www.youtube.com/watch?v=zglAhtxH9LY";
+        }
     });
+};
+
+function updateCounter(increment) {
+    if (increment) {
+        counter++;
+    }
+
+    $("#counter").text("" + counter)
+    localStorage.setItem("counter", counter);
 };
