@@ -43,5 +43,6 @@
     height: 875px;
     background-image: url("landscape.png");
     background-size: cover;
+    transition: background 200ms ease-in-out 300ms;
     z-index: -1;
 }
