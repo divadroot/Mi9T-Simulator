@@ -1,12 +1,3 @@
-@font-face {
-    font-family: 'ComicSansMS';
-    src: url("fonts/ComicSansMS.eot") format('eot'),
-    url("fonts/ComicSansMS.woff") format('woff'),
-    url("fonts/ComicSansMS.ttf") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 #body {
     display: none;
     text-align: center;
@@ -54,10 +45,4 @@
     background-size: cover;
     transition: background 200ms ease-in-out 300ms;
     z-index: -2;
-}
-
-#bottom {
-    font-size: 36px;
-    font-family: "ComicSansMS";
-    text-align: center;
 }
