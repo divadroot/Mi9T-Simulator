@@ -87,7 +87,7 @@ function switchCamera() {
     var cameraPos = parseInt(getAbsolute(camera, "top"));
     var isOpen = cameraPos === 1;
 
-    if (cameraPos > 0 && cameraPos < parseInt(startPos)) {
+    if (cameraPos > 1 && cameraPos < parseInt(startPos)) {
         return;
     }
 
